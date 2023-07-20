@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
+const items = JSON.parse(localStorage.getItem("cartItems") || "[]");
+
 interface CartItemID {
   id: string;
 }
@@ -18,7 +20,7 @@ export interface CartState {
 }
 
 const initialState: CartState = {
-  cartItem: [],
+  cartItem: items,
 };
 
 export const cartSlice = createSlice({
@@ -35,12 +37,21 @@ export const cartSlice = createSlice({
       } else {
         state.cartItem.push({ ...action.payload, quantity: 1 });
       }
+
+      localStorage.setItem(
+        "cartItems",
+        JSON.stringify(state.cartItem.map((item) => item))
+      );
     },
     incrementQuantity: (state, action: PayloadAction<CartItemID>) => {
       const item = state.cartItem.find((item) => item.id === action.payload.id);
       if (item) {
         item.quantity++;
       }
+      localStorage.setItem(
+        "cartItems",
+        JSON.stringify(state.cartItem.map((item) => item))
+      );
     },
     decrementQuantity: (state, action: PayloadAction<CartItemID>) => {
       const item = state.cartItem.find((item) => item.id === action.payload.id);
@@ -51,6 +62,10 @@ export const cartSlice = createSlice({
           item.quantity--;
         }
       }
+      localStorage.setItem(
+        "cartItems",
+        JSON.stringify(state.cartItem.map((item) => item))
+      );
     },
   },
 });

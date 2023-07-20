@@ -24,9 +24,9 @@ const CartListItem: React.FC<CartItem> = ({
 
   return (
     <div className="w-full border-b pb-3">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center text-left">
         <div className="flex gap-3">
-          <div className="w-[87px] h-[54px] rounded overflow-hidden">
+          <div className="w-[87px] h-[54px] rounded overflow-hidden hidden md:block">
             <img
               onError={onImageError}
               className="w-full h-full object-cover"
@@ -35,13 +35,13 @@ const CartListItem: React.FC<CartItem> = ({
             />
           </div>
           <div>
-            <h1 className="text-[20px] font-bold">{title}</h1>
+            <h1 className="text-[16px] md:text-[20px] font-bold">{title}</h1>
             <h2 className="text-[14px] font-medium">
               {PriceFormat(price)} THB/Day
             </h2>
           </div>
         </div>
-        <div className="flex w-[100px] justify-between items-center">
+        <div className="flex w-[100px] md:w-[150px] justify-between items-center">
           <button
             className="bg-[#3B82F6] w-[30px] h-[30px] rounded-lg flex items-center justify-center"
             onClick={() => {
@@ -50,7 +50,7 @@ const CartListItem: React.FC<CartItem> = ({
           >
             <AddIcon />
           </button>
-          <div className="text-[24px]">{quantity}</div>
+          <div className="text-[20px] md:text-[24px]">{quantity}</div>
           <button
             className="bg-[#3B82F6] w-[30px] h-[30px] rounded-lg flex items-center justify-center"
             onClick={() => {

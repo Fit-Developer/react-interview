@@ -42,8 +42,8 @@ const Cart: React.FC = () => {
   };
 
   return (
-    <div className="h-[600px] flex flex-col justify-between">
-      <div className="space-y-3 ">
+    <div className="h-[500px] md:h-[600px] flex flex-col justify-between">
+      <div className="space-y-3 h-[300px] lg:h-[400px] overflow-scroll">
         {cart.map((item) => (
           <CartListItem key={item.id} {...item} />
         ))}
@@ -69,7 +69,10 @@ const Cart: React.FC = () => {
           <div className="flex justify-between text-[20px] border-b mb-2 pb-2">
             <h1 className="font-bold">Grand Total</h1>
             <h2>
-              {discountPrice ? PriceFormat(totalPrice - discountPrice) : 0} THB
+              {discountPrice
+                ? PriceFormat(totalPrice - discountPrice)
+                : PriceFormat(totalPrice)}
+              THB
             </h2>
           </div>
         </div>
