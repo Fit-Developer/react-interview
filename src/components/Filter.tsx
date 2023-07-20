@@ -5,8 +5,11 @@ interface Props {
   title: string;
   search: boolean;
   sort: boolean;
+  onSearch: (query: string) => void;
+  onSort: (query: string) => void;
 }
-const Filter: React.FC<Props> = ({ title, search, sort }) => {
+
+const Filter: React.FC<Props> = ({ title, search, sort, onSearch, onSort }) => {
   return (
     <div className="py-6">
       <div className="container">
@@ -17,12 +20,17 @@ const Filter: React.FC<Props> = ({ title, search, sort }) => {
               className="max-w-full w-full md:w-[300px] border border-[#D1D5DB] h-[40px] px-3 rounded-md"
               type="text"
               placeholder="Search Car"
+              onChange={(e) => onSearch(e.target.value)}
             />
             <div className="w-full md:w-[200px] flex items-center border border-[#D1D5DB] h-[40px] px-3 rounded-md gap-2">
               <SortIcon />
-              <select name="" className="focus:outline-none">
-                <option value="">Price Low - High</option>
-                <option value="">Title</option>
+              <select
+                name=""
+                className="focus:outline-none"
+                onChange={(e) => onSort(e.target.value)}
+              >
+                <option value="price">Price Low - High</option>
+                <option value="title">Title</option>
               </select>
             </div>
           </div>
