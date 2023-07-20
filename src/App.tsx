@@ -1,25 +1,11 @@
 import logo from "./logo.svg";
 
 import "./App.css";
+import "./index.css";
+import Layout from "./components/Layout";
 
 function App() {
-  return (
-    <div>
-      <div className="app-header">
-        <img src={logo} alt="logo" /> <span>Drivehub</span>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-evenly",
-        }}
-      >
-        <div>Car list</div>
-        <div>Cart</div>
-      </div>
-      <div className="app-footer">FOOTER</div>
-    </div>
-  );
+  return <Layout>This is children</Layout>;
 }
 
 export default App;
