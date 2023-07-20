@@ -24,7 +24,9 @@ const CarListItem: React.FC<ICar> = ({ id, title, photo, price }) => {
       <div className="px-3 py-3 space-y-3">
         <div>
           <h1 className="text-[20px] font-bold">{title}</h1>
-          <h2 className="text-[14px] font-medium">{PriceFormat(price)}</h2>
+          <h2 className="text-[14px] font-medium">
+            {PriceFormat(price)} THB/Day
+          </h2>
         </div>
         <button
           className="w-full h-[56px] bg-[#3B82F6] text-white rounded-lg"

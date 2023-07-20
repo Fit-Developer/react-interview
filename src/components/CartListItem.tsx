@@ -36,7 +36,9 @@ const CartListItem: React.FC<CartItem> = ({
           </div>
           <div>
             <h1 className="text-[20px] font-bold">{title}</h1>
-            <h2 className="text-[14px] font-medium">{PriceFormat(price)}</h2>
+            <h2 className="text-[14px] font-medium">
+              {PriceFormat(price)} THB/Day
+            </h2>
           </div>
         </div>
         <div className="flex w-[100px] justify-between items-center">
