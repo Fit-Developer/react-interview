@@ -56,8 +56,10 @@ export const cartSlice = createSlice({
     decrementQuantity: (state, action: PayloadAction<CartItemID>) => {
       const item = state.cartItem.find((item) => item.id === action.payload.id);
       if (item) {
-        if (item?.quantity === 1) {
-          item.quantity = 1;
+        if (item.quantity === 1) {
+          state.cartItem = state.cartItem.filter(
+            (item) => item.id !== action.payload.id
+          );
         } else {
           item.quantity--;
         }

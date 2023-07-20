@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import "./index.css";
 import Layout from "./components/Layout";
@@ -60,7 +60,11 @@ function App() {
           onSearch={(e) => setQ(e)}
           onSort={(e) => setSortOption(e)}
         />
-        {isLoading ? "Loading..." : <CarLists items={filter(CarList)} />}
+        {isLoading ? (
+          <div className="text-center">Loading...</div>
+        ) : (
+          <CarLists items={filter(CarList)} />
+        )}
       </div>
     </Layout>
   );

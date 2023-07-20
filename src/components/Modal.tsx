@@ -16,7 +16,7 @@ const Modal: React.FC<Props> = ({ title, children, onClose }) => {
       <div className="fixed inset-0 bg-[#111827] bg-opacity-80 transition-opacity"></div>
       <div className="fixed inset-0 z-10 overflow-y-auto">
         <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-          <div className="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-xl transition-all sm:my-8 w-full lg:w-[600px]">
+          <div className="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-xl transition-all sm:my-8 w-full md:w-[600px]">
             <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
               <div className="flex items-center justify-between">
                 <h1 className="text-[30px] font-semibold">{title}</h1>

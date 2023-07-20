@@ -9,6 +9,8 @@ import { useFetch } from "../hooks/useFetch";
 const Cart: React.FC = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [discountPrice, setDiscountPrice] = useState(0);
+  const [discountCode, setDiscountCode] = useState("");
+  const [codeStatus, setCodeStatus] = useState("");
   const cart = useSelector((state: RootState) => state.cart.cartItem);
   const { data: discountApi } = useFetch(
     "/spaces/vveq832fsd73/entries?content_type=discount"
@@ -18,6 +20,10 @@ const Cart: React.FC = () => {
     getTotalPrice();
   }, [cart]);
 
+  useEffect(() => {
+    getDiscount();
+  }, [discountCode]);
+
   const getTotalPrice = (): void => {
     const total = cart.reduce((total, item: CartItem) => {
       return total + item.price * item.quantity;
@@ -26,15 +32,18 @@ const Cart: React.FC = () => {
     setTotalPrice(total);
   };
 
-  const getDiscount = (code: string): void => {
-    if (code.length >= 5) {
+  const getDiscount = (): void => {
+    if (discountCode.length >= 5) {
       const { items } = discountApi;
-      const amount = items.find((item: any) => item.fields.code === code)
-        ?.fields?.amount;
+      const amount = items.find(
+        (item: any) => item.fields.code === discountCode
+      )?.fields?.amount;
       if (amount) {
         setDiscountPrice(amount);
+        setCodeStatus("valid");
       } else {
         setDiscountPrice(0);
+        setCodeStatus("invalid");
       }
     } else {
       setDiscountPrice(0);
@@ -44,6 +53,11 @@ const Cart: React.FC = () => {
   return (
     <div className="h-[500px] md:h-[600px] flex flex-col justify-between">
       <div className="space-y-3 h-[300px] lg:h-[400px] overflow-scroll">
+        {cart.length === 0 && (
+          <div className="text-center pt-3 text-gray-500 font-light">
+            No items!!
+          </div>
+        )}
         {cart.map((item) => (
           <CartListItem key={item.id} {...item} />
         ))}
@@ -54,8 +68,17 @@ const Cart: React.FC = () => {
             type="text"
             placeholder="Discount code"
             className="w-full border rounded py-2 px-4 placeholder:text-[#D1D5DB] placeholder:font-light"
-            onChange={(e) => getDiscount(e.target.value)}
+            onChange={(e) => setDiscountCode(e.target.value)}
           />
+          {discountCode.length >= 5 && codeStatus && (
+            <div className="text-sm pl-2 pt-1">
+              {codeStatus === "valid" ? (
+                <span className="text-green-500">Available code.</span>
+              ) : (
+                <span className="text-red-500">Invalid code.</span>
+              )}
+            </div>
+          )}
         </div>
         <div className="pt-3">
           <div className="flex justify-between text-[20px] border-b mb-2 pb-2">

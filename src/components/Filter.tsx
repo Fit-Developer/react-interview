@@ -1,5 +1,5 @@
 import React from "react";
-import { SortIcon } from "./Icon";
+import { ArrowDown, SortIcon } from "./Icon";
 
 interface Props {
   title: string;
@@ -22,16 +22,20 @@ const Filter: React.FC<Props> = ({ title, search, sort, onSearch, onSort }) => {
               placeholder="Search Car"
               onChange={(e) => onSearch(e.target.value)}
             />
-            <div className="w-full md:w-[200px] flex items-center border border-[#D1D5DB] h-[40px] px-3 rounded-md gap-2">
-              <SortIcon />
-              <select
-                name=""
-                className="focus:outline-none"
-                onChange={(e) => onSort(e.target.value)}
-              >
-                <option value="price">Price Low - High</option>
-                <option value="title">Title</option>
-              </select>
+            <div className="w-full md:w-[200px] border border-[#D1D5DB] h-[40px] rounded-md flex items-center relative">
+              <div className="flex items-center gap-2 px-3 w-full">
+                <SortIcon />
+                <select
+                  className="focus:outline-none appearance-none w-full"
+                  onChange={(e) => onSort(e.target.value)}
+                >
+                  <option value="price">Price Low - High</option>
+                  <option value="title">Title</option>
+                </select>
+              </div>
+              <div className="absolute right-3">
+                <ArrowDown />
+              </div>
             </div>
           </div>
         </div>
