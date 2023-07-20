@@ -7,6 +7,7 @@ import CarLists from "./components/CarLists";
 import { useFetch } from "./hooks/useFetch";
 
 export type ICar = {
+  id: string;
   title: string;
   photo: string;
   price: number;
@@ -30,7 +31,9 @@ function App() {
 
   const getCarList = () => {
     const { items } = data;
-    const list = items.map((item: any) => item.fields);
+    const list = items.map((item: any) => {
+      return { id: item.sys.id, ...item.fields };
+    });
     return list;
   };
 

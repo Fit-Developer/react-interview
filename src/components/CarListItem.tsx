@@ -1,7 +1,12 @@
 import React from "react";
 import { ICar } from "../App";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/cartSlice";
+import { PriceFormat } from "../utils";
 
-const CarListItem: React.FC<ICar> = ({ title, photo, price }) => {
+const CarListItem: React.FC<ICar> = ({ id, title, photo, price }) => {
+  const dispatch = useDispatch();
+
   const onImageError = (e: any) => {
     e.target.src = "/assets/notfound.png";
   };
@@ -19,11 +24,22 @@ const CarListItem: React.FC<ICar> = ({ title, photo, price }) => {
       <div className="px-3 py-3 space-y-3">
         <div>
           <h1 className="text-[20px] font-bold">{title}</h1>
-          <h2 className="text-[14px] font-medium">
-            {`${price}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} THB/Day
-          </h2>
+          <h2 className="text-[14px] font-medium">{PriceFormat(price)}</h2>
         </div>
-        <button className="w-full h-[56px] bg-[#3B82F6] text-white rounded-lg">
+        <button
+          className="w-full h-[56px] bg-[#3B82F6] text-white rounded-lg"
+          onClick={() =>
+            dispatch(
+              addToCart({
+                id,
+                title,
+                photo,
+                price,
+                quantity: 1,
+              })
+            )
+          }
+        >
           Add to cart
         </button>
       </div>
