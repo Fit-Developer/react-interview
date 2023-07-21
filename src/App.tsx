@@ -18,7 +18,7 @@ function App() {
   const [q, setQ] = useState("");
   const [sortOption, setSortOption] = useState("price");
 
-  const { data, isLoading } = useFetch(
+  const { data, isLoading, error } = useFetch(
     "/spaces/vveq832fsd73/entries?content_type=car"
   );
 
@@ -49,6 +49,10 @@ function App() {
           : a.price - b.price
       );
   };
+
+  if (error) {
+    return <>{error}</>;
+  }
 
   return (
     <Layout>
