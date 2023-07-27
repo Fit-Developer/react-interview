@@ -92,7 +92,9 @@ const Cart: React.FC = () => {
           <div className="flex justify-between text-[20px] border-b mb-2 pb-2">
             <h1 className="font-bold">Grand Total</h1>
             <h2>
-              {discountPrice
+              {discountPrice > totalPrice
+                ? 0
+                : discountPrice
                 ? PriceFormat(totalPrice - discountPrice)
                 : PriceFormat(totalPrice)}
               THB
